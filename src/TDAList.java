@@ -1,5 +1,4 @@
-package Actividades;
-public interface TDAList<T> {
+public interface TDAList<T extends Comparable<T>> {
     boolean isEmptyList();
     int length();
     void destroyList();
