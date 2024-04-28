@@ -6,4 +6,7 @@ public interface TDAList<T> {
     void insertFirst(T x);
     void insertLast(T x);
     void removeNode(T x);
+
+    //Ejercicio 01
+    void deleteDuplicates();
 }
