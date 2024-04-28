@@ -5,7 +5,7 @@ public class ListLinked<T> implements TDAList<T>{
         this.first = null;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmptyList(){
         return true;
     }
 
@@ -13,7 +13,7 @@ public class ListLinked<T> implements TDAList<T>{
         return 0;
     }
 
-    protected void destroyList(){
+    public void destroyList(){
 
     }
 
