@@ -1,3 +1,7 @@
+package Actividades;
+
+import java.util.LinkedList;
+
 public interface TDAList<T extends Comparable<T>> {
     boolean isEmptyList();
     int length();
@@ -12,4 +16,8 @@ public interface TDAList<T extends Comparable<T>> {
 
     //Ejercicio 02
     void insertNth(T x, int i);
+
+    //Ejercicio 03
+    void deleteNth(int pos);
+
 }

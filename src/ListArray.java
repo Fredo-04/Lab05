@@ -1,3 +1,4 @@
+package Actividades;
 public class ListArray<T> implements TDAListaGenerica<T> {
     private static final int CAPACIDAD_INICIAL = 10;
     private T[] arreglo;

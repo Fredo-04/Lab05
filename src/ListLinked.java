@@ -1,3 +1,6 @@
+package Actividades;
+
+
 public class ListLinked<T extends Comparable<T>> implements TDAList<T> {
     protected Node<T> first;
 
@@ -124,4 +127,74 @@ public class ListLinked<T extends Comparable<T>> implements TDAList<T> {
             current.setNext(newNode);
         }
     }
+    
+    //Ejercicio 03
+    public void deleteNth(int position){
+        if (position < 0 || position > length()) { //si el length de la lista es menor que la posicion o es negativo está fuera del rango
+            System.out.println("Fuera de rango.");
+            return;
+        }
+        if (position == 0){
+            first = first.getNext();    //En caso ingresemos el primer indice, solo el first pasaria a ser el siguiente.
+            return;
+        }else{
+            Node<T> current = first;   //variable auxiliar o temporal para recorrer y no perder el first.
+            for (int i = 0; i < position - 1; i++){ //recorremos hasta llegar a la posicion deseada.
+                current = current.getNext();
+            }
+            current.setNext(current.getNext().getNext()); //Eliminamos el nodo
+        }
+    }
+
+    //Ejercicio 05
+    public ListLinked<Integer> mergeSortedLists(ListLinked<Integer> list1, ListLinked<Integer> list2) {
+        ListLinked<Integer> mergedList = new ListLinked<>();
+        Node<Integer> current1 = list1.first;
+        Node<Integer> current2 = list2.first;
+    
+        while (current1 != null && current2 != null) {
+            if (current1.getData() < current2.getData()) {
+                mergedList.insert(current1.getData());
+                current1 = current1.getNext();
+            } else {
+                mergedList.insert(current2.getData());
+                current2 = current2.getNext();
+            }
+        }
+    
+        while (current1 != null) {
+            mergedList.insert(current1.getData());
+            current1 = current1.getNext();
+        }
+    
+        while (current2 != null) {
+            mergedList.insert(current2.getData());
+            current2 = current2.getNext();
+        }
+    
+        return mergedList;
+    }
+
+    //display, insert
+    public void display() {
+        Node current = first;
+        while (current != null) {
+            System.out.print(current.getData() + " ");
+            current = current.getNext();
+        }
+        System.out.println();
+    }
+    public void insert(T data) {
+        Node newNode = new Node(data);
+        if (first == null) {
+            first = newNode;
+        } else {
+            Node current = first;
+            while (current.getNext() != null) {
+                current = current.getNext();
+            }
+            current.setNext(newNode);
+        }
+    }
+    
 }

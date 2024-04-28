@@ -1,3 +1,4 @@
+package Actividades;
 public interface TDAListaGenerica<T> {
     boolean isEmptyList();
     int length();

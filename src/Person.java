@@ -1,3 +1,4 @@
+package Actividades;
 public class Person {
     private String nombre;
     private String apellidos;
