@@ -83,22 +83,45 @@ public class ListLinked<T extends Comparable<T>> implements TDAList<T> {
         return stringBuilder.toString();
     }
 
+    //Ejercicio 01
     public void deleteDuplicates(){
         if (first == null || first.getNext() == null) { //si la lista está vacia o solo tiene un deleteItem, no habrian duplicados
             return;
         }
         Node<T> current = first; //creamos un anexo o variable temporal para poder recorrer y no perder datos
         while (current != null) {
-            Node<T> runner = current; //recorremos con una nueva variable 
-            while (runner.getNext() != null) {
-                if (current.getData().compareTo(runner.getNext().getData()) == 0) {
-                    // Se encontró un nodo duplicado
+            Node<T> runner = current; //creamos una nueva variable para comparar con el resto y recorrer
+            while (runner.getNext() != null) { //recorremos 
+                if (current.getData().compareTo(runner.getNext().getData()) == 0) { //comparamos si el nodo actual no tiene duplicados
+                    //se encontró un nodo duplicado
                     runner.setNext(runner.getNext().getNext());
                 } else {
                     runner = runner.getNext();
                 }
             }
             current = current.getNext();
+        }
+    }
+
+    //Ejercicio 02
+    public void insertNth(T data, int position){
+        if (position < 0 || position > length()) { //si el length de la lista es menor que la posicion o es negativo está fuera del rango
+            System.out.println("Fuera de rango.");
+            return;
+        }
+
+        Node<T> newNode = new Node<>(data); //nodo a agregar a la lista
+
+        if (position == 0) { //en caso sea 0 se ingresa al inicio
+            insertFirst(data);
+        } else {
+            Node<T> current = first; //variable temporal para recorrer y no perder datos
+            for (int i = 0; i < position - 1; i++) { //recorremos hasta encontrar la posición
+                current = current.getNext();
+            }
+            //insertamos nodo
+            newNode.setNext(current.getNext());
+            current.setNext(newNode);
         }
     }
 }

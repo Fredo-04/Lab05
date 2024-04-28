@@ -9,4 +9,7 @@ public interface TDAList<T extends Comparable<T>> {
 
     //Ejercicio 01
     void deleteDuplicates();
+
+    //Ejercicio 02
+    void insertNth(T x, int i);
 }
