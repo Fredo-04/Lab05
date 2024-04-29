@@ -1,6 +1,3 @@
-package Actividades;
-
-
 public class ListLinked<T extends Comparable<T>> implements TDAList<T> {
     protected Node<T> first;
 
