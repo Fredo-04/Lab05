@@ -228,5 +228,45 @@ public class ListLinked<T extends Comparable<T>> implements TDAList<T> {
             current.setNext(newNode);
         }
     }
-    
+    //Ejercicio 06
+    public void reverseSublist(int left, int right) {
+        if (left < 1 || right > length() || left >= right) {
+            // Verifica si los índices son válidos y si left es menor que right
+            System.out.println("Índices inválidos.");
+            return;
+        }
+
+        Node<T> prev = null;		//Node prev
+        Node<T> current = first;	//Node Aux o current
+        int count = 1;
+
+        // Avanza hasta el nodo en la posición left
+        while (current != null && count < left) {
+            prev = current;
+            current = current.getNext();
+            count++;
+        }
+
+        // Invierte la sublista
+        Node<T> sublistPrev = prev; // Nodo anterior al inicio de la sublista
+        Node<T> sublistStart = current; // Primer nodo de la sublista
+        Node<T> next = null;
+
+        while (current != null && count <= right) {
+            next = current.getNext();
+            current.setNext(prev);
+            prev = current;
+            current = next;
+            count++;
+        }
+
+        // Conecta la sublista invertida con el resto de la lista
+        if (sublistPrev != null) {
+            sublistPrev.setNext(prev);
+        } else {
+            first = prev; // Si la sublista comienza desde el primer nodo, actualiza "first"
+        }
+
+        sublistStart.setNext(current); // Conecta el último nodo invertido con el siguiente nodo después de la sublista
+    }
 }

@@ -1,6 +1,3 @@
-package ACTIVIDAD;
-
-
 public class Main3 {
     public static void main(String[] args) {
     	//insertar en la lista enlazada

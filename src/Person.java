@@ -1,4 +1,4 @@
-public class Person {
+public class Person implements Comparable<Person> {
     private String nombre;
     private String apellidos;
     private int edad;
@@ -21,12 +21,13 @@ public class Person {
 
     public void setEdad(int edad) {this.edad = edad;}
 
+    @Override   //Sobrecarga de CompareTo.
+    public int compareTo(Person otraPersona) {  //COMPARACION DE EDADES. 
+        return this.edad - otraPersona.edad;
+    }
+
     @Override
     public String toString() {
-        return "Person{" +
-                "nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", edad=" + edad +
-                '}';
+        return String.format("Nombre: %s, Apellidos: %s, Edad: %d", nombre, apellidos, edad);
     }
 }

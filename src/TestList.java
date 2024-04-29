@@ -43,5 +43,30 @@ public class TestList {
         listaPersonas.insert(new Person("Pedro", "Marmol",20));
         System.out.println("Lista de personas ordenadas por edad");
         listaPersonas.display();
+        
+        System.out.println("\nPrueba de reverseSublist");
+        ListLinked<Integer> list = new ListLinked<>();
+
+        // Insertar elementos en la lista
+        list.insertLast(1);
+        list.insertLast(2);
+        list.insertLast(3);
+        list.insertLast(4);
+        list.insertLast(5);
+        list.insertLast(6);
+        list.insertLast(7);
+
+        // Mostrar la lista original
+        System.out.println("Lista original:");
+        list.display();
+
+        // Invertir la sublista del índice 2 al 5
+        int leftIndex = 2;
+        int rightIndex = 5;
+        list.reverseSublist(leftIndex, rightIndex);
+
+        // Mostrar la lista después de invertir la sublista
+        System.out.println("Lista después de invertir la sublista del índice " + leftIndex + " al " + rightIndex + ":");
+        list.display();
     }
 }

@@ -1,6 +1,3 @@
-
-import java.util.LinkedList;
-
 public interface TDAList<T extends Comparable<T>> {
     boolean isEmptyList();
     int length();
@@ -19,4 +16,6 @@ public interface TDAList<T extends Comparable<T>> {
     //Ejercicio 03
     void deleteNth(int pos);
 
+    //Ejercicio 06
+    void reverseSublist(int left, int right);
 }
