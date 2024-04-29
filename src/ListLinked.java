@@ -125,52 +125,87 @@ public class ListLinked<T extends Comparable<T>> implements TDAList<T> {
         }
     }
     
-    //Ejercicio 03
-    public void deleteNth(int position){
-        if (position < 0 || position > length()) { //si el length de la lista es menor que la posicion o es negativo está fuera del rango
-            System.out.println("Fuera de rango.");
-            return;
-        }
-        if (position == 0){
-            first = first.getNext();    //En caso ingresemos el primer indice, solo el first pasaria a ser el siguiente.
-            return;
-        }else{
-            Node<T> current = first;   //variable auxiliar o temporal para recorrer y no perder el first.
-            for (int i = 0; i < position - 1; i++){ //recorremos hasta llegar a la posicion deseada.
-                current = current.getNext();
+    /* metodos pal ejercicio 3*/
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        //si es una lista vacia
+        if (first == null) {
+        	first = newNode;
+        } else {//si tiene elementos, usamos un indice auxiliar
+            Node current = first;
+            //si la referencia al siguiente nodo no es null, recorrer
+            while (current.next != null) {
+                current = current.next;
             }
-            current.setNext(current.getNext().getNext()); //Eliminamos el nodo
+            //cuando la sgte referencia sea null, agrega el nodo al final
+            current.next = newNode;
         }
     }
-
-    //Ejercicio 05
-    public ListLinked<Integer> mergeSortedLists(ListLinked<Integer> list1, ListLinked<Integer> list2) {
-        ListLinked<Integer> mergedList = new ListLinked<>();
+    //borrar posicion n
+    public void deleteNth(int position) {
+    	//si la posicion a borrar es menor a 0 o mas del tamaño de la lista
+        if (position < 0 || position >= length()) {
+            System.out.println("Error: Posición fuera de rango.");
+            return;
+        }
+        //si es el primer elemento el q se borra
+        if (position == 0) {
+        	//el indice pasa al segundo elemento, perdiendo asi la informacion del primero.
+        	first = first.next;
+            return;
+        }
+        //nodo auxiliar
+        Node current = first;
+        // recorre la lista hasta el elemento enterior a borrar
+        for (int i = 0; current != null && i < position - 1; i++) {
+            current = current.next;
+        }
+        //si es lista vacia, o el nodo actual o sgte es nulo
+        if (current == null || current.next == null) {
+            return;
+        }
+        //actualiza para que el siguiente (que es el q se va borrar), pase a ser el siguiente de ese. Ej. 1 a 3, ya no 1 a 2.
+        current.next = current.next.next;
+    }
+    
+    /*aqui acaban los metodos pal ejercicio 3*/
+    
+    /*metodos pal ejercicio 5*/
+    //merge sort, se especifica el tipo de dato a emplear (integer)
+    public static LinkedList mergeSortedLists(LinkedList<Integer> list1, LinkedList<Integer> list2) {
+        //crea nueva lista del mismo tipo de dato
+    	LinkedList<Integer> mergedList = new LinkedList();
+    	//nodos auxiliares para cada lista enlazada
         Node<Integer> current1 = list1.first;
         Node<Integer> current2 = list2.first;
-    
+        //mientras ambas listas tengan elementos
         while (current1 != null && current2 != null) {
-            if (current1.getData() < current2.getData()) {
-                mergedList.insert(current1.getData());
-                current1 = current1.getNext();
+        	//compara y el menor lo agrega a la nueva lista
+            if (current1.data < current2.data) {
+                mergedList.insert(current1.data);
+                current1 = current1.next;
             } else {
-                mergedList.insert(current2.getData());
-                current2 = current2.getNext();
+                mergedList.insert(current2.data);
+                current2 = current2.next;
             }
         }
-    
+        //si la segunda lista llega a su fin
         while (current1 != null) {
-            mergedList.insert(current1.getData());
-            current1 = current1.getNext();
+        	//agrega los restantes de la primera lista
+            mergedList.insert(current1.data);
+            current1 = current1.next;
         }
-    
+        
+        //si la primera lista llega a su fin
         while (current2 != null) {
-            mergedList.insert(current2.getData());
-            current2 = current2.getNext();
+        	//agrega los de la segunda lista
+            mergedList.insert(current2.data);
+            current2 = current2.next;
         }
-    
+
         return mergedList;
     }
+    // aqui acaban los metodos pal ejercicio 5
 
     //display, insert
     public void display() {
