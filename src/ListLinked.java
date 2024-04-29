@@ -83,6 +83,18 @@ public class ListLinked<T extends Comparable<T>> implements TDAList<T> {
         return stringBuilder.toString();
     }
 
+    public void insert(T data) {
+        Node<T> newNode = new Node<T>(data);
+        if (first == null) {
+            first = newNode;
+        } else {
+            Node<T> current = first;
+            while (current.getNext() != null) {
+                current = current.getNext();
+            }
+            current.setNext(newNode);
+        }
+    }
     //Ejercicio 01
     public void deleteDuplicates(){
         if (first == null || first.getNext() == null) { //si la lista está vacia o solo tiene un deleteItem, no habrian duplicados
@@ -126,21 +138,7 @@ public class ListLinked<T extends Comparable<T>> implements TDAList<T> {
     }
     
     /* metodos pal ejercicio 3*/
-    public void insert(int data) {
-        Node newNode = new Node(data);
-        //si es una lista vacia
-        if (first == null) {
-        	first = newNode;
-        } else {//si tiene elementos, usamos un indice auxiliar
-            Node current = first;
-            //si la referencia al siguiente nodo no es null, recorrer
-            while (current.getNext() != null) {
-                current = current.getNext();
-            }
-            //cuando la sgte referencia sea null, agrega el nodo al final
-            current.setNext(newNode);
-        }
-    }
+    
     //borrar posicion n
     public void deleteNth(int position) {
     	//si la posicion a borrar es menor a 0 o mas del tamaño de la lista
@@ -155,7 +153,7 @@ public class ListLinked<T extends Comparable<T>> implements TDAList<T> {
             return;
         }
         //nodo auxiliar
-        Node current = first;
+        Node<T> current = first;
         // recorre la lista hasta el elemento enterior a borrar
         for (int i = 0; current != null && i < position - 1; i++) {
             current = current.getNext();
@@ -171,17 +169,17 @@ public class ListLinked<T extends Comparable<T>> implements TDAList<T> {
     /*aqui acaban los metodos pal ejercicio 3*/
     
     /*metodos pal ejercicio 5*/
-    //merge sort, se especifica el tipo de dato a emplear (integer)
-    public static ListLinked mergeSortedLists(ListLinked<Integer> list1, ListLinked<Integer> list2) {
+    //merge sort, se especifica el tipo de dato a emplear (T)
+    public ListLinked<T> mergeSortedLists(ListLinked<T> list1, ListLinked<T> list2) {
         //crea nueva lista del mismo tipo de dato
-    	ListLinked<Integer> mergedList = new ListLinked();
+    	ListLinked<T> mergedList = new ListLinked<T>();
     	//nodos auxiliares para cada lista enlazada
-        Node<Integer> current1 = list1.first;
-        Node<Integer> current2 = list2.first;
+        Node<T> current1 = list1.first;
+        Node<T> current2 = list2.first;
         //mientras ambas listas tengan elementos
         while (current1 != null && current2 != null) {
         	//compara y el menor lo agrega a la nueva lista
-            if (current1.getData() < current2.getData()) {
+            if (current1.getData().compareTo(current2.getData()) == -1) {
                 mergedList.insert(current1.getData());
                 current1 = current1.getNext();
             } else {
@@ -209,25 +207,15 @@ public class ListLinked<T extends Comparable<T>> implements TDAList<T> {
 
     //display, insert
     public void display() {
-        Node current = first;
+        Node<T> current = first;
         while (current != null) {
             System.out.print(current.getData() + " ");
             current = current.getNext();
         }
         System.out.println();
     }
-    public void insert(T data) {
-        Node newNode = new Node(data);
-        if (first == null) {
-            first = newNode;
-        } else {
-            Node current = first;
-            while (current.getNext() != null) {
-                current = current.getNext();
-            }
-            current.setNext(newNode);
-        }
-    }
+    
+    
     //Ejercicio 06
     public void reverseSublist(int left, int right) {
         if (left < 1 || right > length() || left >= right) {
